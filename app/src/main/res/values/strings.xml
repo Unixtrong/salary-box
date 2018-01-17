@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">个税计算器</string>
+    <string name="home_cal">计算</string>
+    <string name="home_origin_salary">税前薪资总和</string>
+</resources>
