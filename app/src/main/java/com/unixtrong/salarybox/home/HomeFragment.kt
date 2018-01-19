@@ -29,9 +29,10 @@ class HomeFragment : Fragment() {
         btnCalc.setOnClickListener {
             val call = SalaryRepo.calcFinal(etInput.text.toString())
             call.enqueue(object : Callback<String> {
+                @SuppressLint("SetTextI18n")
                 override fun onFailure(call: Call<String>?, t: Throwable?) {
                     t?.let {
-                        etInput.setText(it.message)
+                        etInput.setText("onFailure:\n${it.message}")
                         it.printStackTrace()
                     }
                 }
@@ -39,7 +40,7 @@ class HomeFragment : Fragment() {
                 @SuppressLint("SetTextI18n")
                 override fun onResponse(call: Call<String>?, response: Response<String>?) {
                     response?.let {
-                        etInput.setText("${response.body()}\n===\n${response.errorBody()}")
+                        etInput.setText("onResponse:\n${response.body()}\n===\n${response.errorBody()}")
                     }
                 }
             })
