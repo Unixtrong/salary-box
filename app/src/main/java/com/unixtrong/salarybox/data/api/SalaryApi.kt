@@ -1,5 +1,6 @@
 package com.unixtrong.salarybox.data.api
 
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,10 +16,10 @@ interface SalaryApi {
                   @Query("base_gjj") baseFund: Int,
                   @Query("is_gjj") hasFund: Boolean,
                   @Query("is_exgjj") hasExtraFund: Boolean,
-                  @Query("factor_exgjj") extraFundFactor: String)
+                  @Query("factor_exgjj") extraFundFactor: String): Call<String>
 
     companion object {
-        fun create() = Retrofit.Builder()
+        fun create(): SalaryApi = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://salarycalculator.sinaapp.com/")

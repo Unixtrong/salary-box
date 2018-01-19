@@ -13,13 +13,13 @@
         android:hint="@string/home_origin_salary"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toTopOf="@+id/btnCal"
+        app:layout_constraintBottom_toTopOf="@+id/btnCalc"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/btnCal"
+        android:id="@+id/btnCalc"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorAccent"
