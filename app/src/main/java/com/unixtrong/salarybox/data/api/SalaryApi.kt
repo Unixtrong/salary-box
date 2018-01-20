@@ -1,5 +1,6 @@
 package com.unixtrong.salarybox.data.api
 
+import com.unixtrong.salarybox.data.SalaryDetails
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -16,7 +17,7 @@ interface SalaryApi {
                   @Query("base_gjj") baseFund: Int,
                   @Query("is_gjj") hasFund: Boolean,
                   @Query("is_exgjj") hasExtraFund: Boolean,
-                  @Query("factor_exgjj") extraFundFactor: String): Call<String>
+                  @Query("factor_exgjj") extraFundFactor: String): Call<SalaryDetails>
 
     companion object {
         fun create(): SalaryApi = Retrofit.Builder()

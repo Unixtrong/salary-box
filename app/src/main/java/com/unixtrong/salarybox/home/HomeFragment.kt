@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.unixtrong.salarybox.R
+import com.unixtrong.salarybox.data.SalaryDetails
 import com.unixtrong.salarybox.data.source.SalaryRepo
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
@@ -26,11 +27,12 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        etInput.setText("20000")
         btnCalc.setOnClickListener {
             val call = SalaryRepo.calcFinal(etInput.text.toString())
-            call.enqueue(object : Callback<String> {
+            call.enqueue(object : Callback<SalaryDetails> {
                 @SuppressLint("SetTextI18n")
-                override fun onFailure(call: Call<String>?, t: Throwable?) {
+                override fun onFailure(call: Call<SalaryDetails>?, t: Throwable?) {
                     t?.let {
                         etInput.setText("onFailure:\n${it.message}")
                         it.printStackTrace()
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
                 }
 
                 @SuppressLint("SetTextI18n")
-                override fun onResponse(call: Call<String>?, response: Response<String>?) {
+                override fun onResponse(call: Call<SalaryDetails>?, response: Response<SalaryDetails>?) {
                     response?.let {
                         etInput.setText("onResponse:\n${response.body()}\n===\n${response.errorBody()}")
                     }
