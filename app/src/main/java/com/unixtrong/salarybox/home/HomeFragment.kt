@@ -17,11 +17,14 @@ import retrofit2.Response
 /** Created by danyun on 2018/1/17 */
 class HomeFragment : Fragment() {
 
+    private var viewModel: HomeViewModel? = null
+
     companion object {
         fun newInstance() = HomeFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        viewModel = HomeActivity.obtainViewModel(activity)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -29,23 +32,11 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         etInput.setText("20000")
         btnCalc.setOnClickListener {
-            val call = SalaryRepo.calcFinal(etInput.text.toString())
-            call.enqueue(object : Callback<SalaryDetails> {
-                @SuppressLint("SetTextI18n")
-                override fun onFailure(call: Call<SalaryDetails>?, t: Throwable?) {
-                    t?.let {
-                        etInput.setText("onFailure:\n${it.message}")
-                        it.printStackTrace()
-                    }
-                }
+            SalaryRepo.calcFinal(etInput.text.toString()) {
+                it?.let {
 
-                @SuppressLint("SetTextI18n")
-                override fun onResponse(call: Call<SalaryDetails>?, response: Response<SalaryDetails>?) {
-                    response?.let {
-                        etInput.setText("onResponse:\n${response.body()}\n===\n${response.errorBody()}")
-                    }
                 }
-            })
+            }
         }
     }
 }
