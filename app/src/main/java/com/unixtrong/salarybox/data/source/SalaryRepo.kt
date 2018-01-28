@@ -1,7 +1,9 @@
 package com.unixtrong.salarybox.data.source
 
 import android.annotation.SuppressLint
-import com.unixtrong.salarybox.data.SalaryDetails
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import com.unixtrong.salarybox.data.SalaryData
 import com.unixtrong.salarybox.data.api.SalaryApi
 import com.unixtrong.salarybox.tools.debug
 import com.unixtrong.salarybox.tools.warn
@@ -13,7 +15,7 @@ import retrofit2.Response
 object SalaryRepo {
     private val salaryApi = SalaryApi.create()
 
-    fun calcFinal(origin: String, callback: (data: SalaryDetails?) -> Unit) {
+    fun calcFinal(origin: String): LiveData<SalaryData> {
         val call = salaryApi.calculate(
                 "shanghai",
                 origin,
@@ -22,10 +24,11 @@ object SalaryRepo {
                 true,
                 false,
                 "0.08")
-
-        call.enqueue(object : Callback<SalaryDetails> {
+    
+        val liveData = MutableLiveData<SalaryData>()
+        call.enqueue(object : Callback<SalaryData> {
             @SuppressLint("SetTextI18n")
-            override fun onFailure(call: Call<SalaryDetails>?, t: Throwable?) {
+            override fun onFailure(call: Call<SalaryData>?, t: Throwable?) {
                 t?.let {
                     warn("onFailure:\n${it.message}")
                     it.warn()
@@ -33,12 +36,13 @@ object SalaryRepo {
             }
 
             @SuppressLint("SetTextI18n")
-            override fun onResponse(call: Call<SalaryDetails>?, response: Response<SalaryDetails>?) {
+            override fun onResponse(call: Call<SalaryData>?, response: Response<SalaryData>?) {
                 response?.let {
                     debug("onResponse:\n${response.body()}\n===\n${response.errorBody()}")
-                    callback.invoke(response.body())
+                    liveData.value = response.body()
                 }
             }
         })
+        return liveData
     }
 }

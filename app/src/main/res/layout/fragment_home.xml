@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/btnCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/home_city"
+        android:textColor="@color/colorButton"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvInputHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/home_tv_input_hint"
+        android:textColor="@color/textBlack"
+        app:layout_constraintLeft_toLeftOf="@id/btnCity"
+        app:layout_constraintTop_toBottomOf="@+id/btnCity" />
+
     <EditText
         android:id="@+id/etInput"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="bottom|end"
-        android:hint="@string/home_origin_salary"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:hint="@string/home_et_integer_hint"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toTopOf="@+id/btnCalc"
+        android:textSize="@dimen/text_normal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnCity" />
 
     <Button
         android:id="@+id/btnCalc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        android:gravity="bottom|end"
-        android:text="@string/home_cal"
-        android:textColor="@color/text_white"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etInput"/>
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/home_btn_open_details"
+        app:layout_constraintRight_toRightOf="@+id/etInput"
+        app:layout_constraintTop_toBottomOf="@+id/etInput" />
 </android.support.constraint.ConstraintLayout>

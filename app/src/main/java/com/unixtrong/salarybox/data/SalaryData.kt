@@ -1,7 +1,7 @@
 package com.unixtrong.salarybox.data
 
 /** Created by danyun on 2018/1/19 */
-data class SalaryDetails(
+data class SalaryData(
         val origin_salary: String,
         val percent_factor_exgjj: String,
         val base_3j: String,

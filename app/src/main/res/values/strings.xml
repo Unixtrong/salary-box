@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">个税计算器</string>
-    <string name="home_cal">计算</string>
-    <string name="home_origin_salary">税前薪资总和</string>
+    <string name="home_btn_open_details">查看税后薪资</string>
+    <string name="home_et_integer_hint">请输入整数</string>
+    <string name="home_city">上海</string>
+    <string name="home_tv_input_hint">请输入税前总薪资。</string>
 </resources>
