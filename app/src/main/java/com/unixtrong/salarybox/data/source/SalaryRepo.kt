@@ -12,8 +12,16 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /** Created by danyun on 2018/1/19 */
-object SalaryRepo {
+class SalaryRepo {
     private val salaryApi = SalaryApi.create()
+
+    companion object {
+        private var INSTANCE: SalaryRepo? = null
+
+        fun getInstance() = INSTANCE ?: synchronized(SalaryRepo::class.java) {
+            INSTANCE ?: SalaryRepo().also { INSTANCE = it }
+        }
+    }
 
     fun calcFinal(origin: String): LiveData<SalaryData> {
         val call = salaryApi.calculate(
@@ -24,7 +32,7 @@ object SalaryRepo {
                 true,
                 false,
                 "0.08")
-    
+
         val liveData = MutableLiveData<SalaryData>()
         call.enqueue(object : Callback<SalaryData> {
             @SuppressLint("SetTextI18n")

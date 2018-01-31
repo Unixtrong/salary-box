@@ -10,11 +10,15 @@ import com.unixtrong.salarybox.data.source.SalaryRepo
  * danyun
  * 2018/1/28
  */
-class DetailsViewModel(app: Application) : AndroidViewModel(app) {
+class DetailsViewModel(
+        app: Application,
+        private val salaryRepo: SalaryRepo
+) : AndroidViewModel(app) {
+
     private var liveData: LiveData<SalaryData>? = null
 
     fun calc(origin: String): LiveData<SalaryData>? {
-        liveData = SalaryRepo.calcFinal(origin)
+        liveData = salaryRepo.calcFinal(origin)
         return liveData
     }
 }

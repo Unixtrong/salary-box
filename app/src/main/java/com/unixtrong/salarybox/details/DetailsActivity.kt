@@ -1,11 +1,10 @@
 package com.unixtrong.salarybox.details
 
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
 import com.unixtrong.salarybox.R
 import com.unixtrong.salarybox.tools.ActivityUtils.addFragment
+import com.unixtrong.salarybox.tools.obtainViewModel
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -13,9 +12,6 @@ class DetailsActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_ORIGIN = "ORIGIN_SALARY"
-        fun obtainViewModel(activity: FragmentActivity): DetailsViewModel {
-            return ViewModelProviders.of(activity).get(DetailsViewModel::class.java)
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +31,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        viewModel = obtainViewModel(this)
+        viewModel = obtainViewModel(DetailsViewModel::class.java)
     }
 }

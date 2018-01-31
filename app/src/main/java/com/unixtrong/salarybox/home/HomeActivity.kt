@@ -1,23 +1,16 @@
 package com.unixtrong.salarybox.home
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import com.unixtrong.salarybox.R
 import com.unixtrong.salarybox.details.DetailsActivity
 import com.unixtrong.salarybox.tools.ActivityUtils.addFragment
+import com.unixtrong.salarybox.tools.obtainViewModel
 
 class HomeActivity : AppCompatActivity(), HomeNavigator {
     private var viewModel: HomeViewModel? = null
-
-    companion object {
-        fun obtainViewModel(activity: FragmentActivity): HomeViewModel {
-            return ViewModelProviders.of(activity).get(HomeViewModel::class.java)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +31,7 @@ class HomeActivity : AppCompatActivity(), HomeNavigator {
     }
 
     private fun setupViewModel() {
-        viewModel = obtainViewModel(this)
+        viewModel = obtainViewModel(HomeViewModel::class.java)
         viewModel?.openDetailsEvent?.observe(this, Observer {
             it?.let { openDetails(it) }
         })
